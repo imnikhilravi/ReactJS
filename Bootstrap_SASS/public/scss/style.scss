@@ -1,0 +1,24 @@
+
+$theme-colors: (
+  "primary": navy
+);
+
+@mixin no-bullets {
+  list-style-type: none;
+  list-style-image: none;
+  ul{
+    list-style-image: none;
+    list-style-type: none;
+  }
+  li{
+    list-style-type: none;
+    &.leaf{
+      list-style-image: none;
+      list-style-type: none;
+    }
+  }
+}
+
+$link-color: navy;
+
+@import "node_modules/bootstrap/scss/bootstrap";

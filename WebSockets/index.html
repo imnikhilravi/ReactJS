@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Pics Search</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font: 13px Helvetica, Arial;
+		}
+
+		form {
+			padding: 3px;
+			position: fixed;
+			width: 40%;
+			top:25%;
+			bottom: 25%;
+			scroll-behavior: initial;
+			margin-left: 5%;
+		}
+		
+		#formPlace {
+
+		}
+		
+		label {
+			font-size: 15px;
+			width: 30%;
+			text-align: right; 
+
+		}
+		
+		#output{
+			margin-left: 30%;
+			border-style: solid;
+			border-color: red;
+			margin-right: 30%;
+		}
+		
+		
+		#container {
+			position: relative;
+			overflow: hidden;
+			margin-left: 20%;
+		}
+
+		input[type=text], select {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			font-style: italic;
+			font-size: 20px;
+			border-radius: 4px;
+			box-sizing: border-box;
+			border: none;
+    		border-bottom: 2px solid red;
+		}
+
+		input[type=text] , search
+		{
+			background-color: white;
+			background-image: url('searchicon.jpg');
+			background-position: 10px 10px;
+			background-repeat: no-repeat;
+			padding-left: 40px;
+		}
+
+		h1{
+			font: bold;
+			color: red;
+			
+		}
+		
+		p{
+			color: darkred ;
+			font-size: 20px;
+		}
+
+		form button {
+			border: none;
+			padding: 15px 32px;
+			text-align: center;
+			margin-left: 40%;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			color: rgb(255, 255, 255); background-color: darkred;
+			}
+		
+		li{
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-template-rows: auto;
+			grid-gap: 20px;
+			width: 90%;
+			max-width: 1240px;
+			margin: 0 auto;
+		}
+		
+		body{
+
+		}
+
+		#container{
+			display: grid;
+			left: 140px !important; 
+			text-align: center;
+		}
+
+		#messages {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		#messages li {
+			padding: 5px 10px;
+		}
+
+	</style>
+</head>
+
+<body>
+	
+<div id= "formPlace">
+	<form name="formPlace">
+		<label for="username">Username: </label>
+		<input type="text" id="username" placeholder="Username" name="username" required/>
+		<br> <label for="search"> Search: </label>
+		<input type="text" id="search" placeholder="Pics you want to search for!!" name="search" />
+		<br> <label for="message">Message: </label>
+		<input type="text" id="message" placeholder="Enter the message... !!" name="message" />
+		<br><br>
+		<button>Forward</button>
+	</form>
+</div>
+<div id = "container" class="card">
+		<ul class="list-group list-group-flush" id="posts"></ul>
+	</div>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>	
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+		const socket = io('http://localhost:3000/picsearch');
+		const posts = $("#posts");
+		const username = $("#username");
+		const search = $("#search");
+		const message = $("#message");
+		const theForm = $("form");
+
+		socket.on('post-results', function (data) {
+			imagesHtml = `No images available with ${data.search}<br>`;
+			if (data.images && data.images.length > 0) {
+				imagesHtml = "";
+				data.images.forEach(image => {
+					imagesHtml += `<img src=${image}><br>`;
+				});
+			}
+			
+			posts.append($('<li>').html(`<div id="output"> <h1>${ data.username} 
+									</h1><br> <p>${imagesHtml + data.message} </p> </div>` + "<br><br><br>"));
+
+		});
+
+		theForm.submit(function () { 
+			errors = [];
+
+			if (search.val().length == 0)
+				errors.push("You should search for something!!");
+
+			if (message.val().length == 0)
+				errors.push("There should be some message sent..!!");
+
+			if (errors.length == 0) {
+				let data = {
+					username: username.val().trim(),
+					search: search.val().trim(),
+					message: message.val()
+				};
+				socket.emit('pixabay-search', data);
+				username.prop("readonly", true);
+				message.val('');
+				search.val('');
+			}
+			else {
+				errorMsg = "";
+				errors.forEach(error => {
+					errorMsg += error + "\n";
+				});
+				alert(errorMsg);
+			}
+			return false;
+		});
+
+	</script>
+</body>
+
+</html>

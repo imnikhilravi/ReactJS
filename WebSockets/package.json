@@ -1,0 +1,28 @@
+{
+  "name": "nikhil_ravi_assignment6_cs554",
+  "version": "1.4.5",
+  "description": "websockets and worker",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js & node worker.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imnikhilravi/Web-Programming-2.git"
+  },
+  "author": "Nikhil Ravi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imnikhilravi/Web-Programming-2/issues"
+  },
+  "homepage": "https://github.com/imnikhilravi/Web-Programming-2#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "node-redis-pubsub": "^2.0.0",
+    "redis": "^2.8.0",
+    "socket.io": "^2.1.0"
+  }
+}

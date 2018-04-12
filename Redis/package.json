@@ -1,0 +1,19 @@
+{
+  "name": "nikhil_ravi_assignment4_cs554",
+  "version": "1.4.5",
+  "description": "redis people data",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nikhil Ravi",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.1",
+    "express": "^4.16.3",
+    "redis": "^2.8.0",
+    "fs": "0.0.1"
+  }
+}

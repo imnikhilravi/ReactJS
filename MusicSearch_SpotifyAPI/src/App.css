@@ -1,0 +1,67 @@
+h1 {
+    text-align: center;
+}
+
+#search {
+    left: 200px;
+    margin: 80px;
+    border: 5px red; 
+}
+
+a{
+    color: #f67e88 !important;
+}
+
+input[type=text] {
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+ul {
+    list-style-type: none;
+    display: inline;
+       
+}
+
+
+button { 
+    -webkit-box-align: center;
+    width: 7rem !important;
+    align-self: center;
+    text-align: center !important;
+    border-radius: 12px !important;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19) !important;
+    background-color: black !important;
+}
+
+#tracklist {
+    left: 100px !important;
+    display:inline-block;
+    width:100%;
+}
+
+li{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    width: 90%;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+
+#songlist{
+    display: grid;
+    left: 140px !important; 
+    text-align: center;
+}
+
+#search{
+    display: grid;
+    left: 200px !important;
+    text-align: center;
+}
+
+
+
